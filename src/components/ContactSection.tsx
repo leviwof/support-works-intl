@@ -63,15 +63,18 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
   };
 
   return (
-    <section id="contact" className={`py-20 relative bg-[#000000] ${isStandalone ? 'pt-8' : ''}`}>
+    <section id="contact" className={`py-20 relative bg-white border-b border-slate-200/80 ${isStandalone ? 'pt-8' : ''}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3 font-space">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200/60 text-[#ea580c] text-[11px] font-bold tracking-widest uppercase mb-3 font-mono">
+            Direct Assistance
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3 font-space">
             Contact Us
           </h2>
-          <p className="text-neutral-400 text-sm leading-relaxed">
+          <p className="text-slate-600 text-sm leading-relaxed">
             Tell us what you need help with. We respond promptly during standard business hours.
           </p>
         </div>
@@ -80,66 +83,66 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
           
           {/* Quick Info (Left Side - 4 Columns) */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="revond-card p-6 rounded-2xl border border-[#1a1a1a] bg-[#090909] space-y-4">
+            <div className="p-6 rounded-2xl border border-slate-200 bg-slate-50/80 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#222222] text-[#ff3b00] flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-[#ea580c] flex items-center justify-center flex-shrink-0 shadow-sm">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-wider">Email Us</div>
+                  <div className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">Email Us</div>
                   <a 
                     href="mailto:info@supportworksinternational.com" 
-                    className="text-xs font-bold text-white hover:text-[#ff3b00] transition-colors"
+                    className="text-xs font-bold text-slate-900 hover:text-[#ea580c] transition-colors"
                   >
                     info@supportworksinternational.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 pt-3 border-t border-[#141414]">
-                <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#222222] text-[#ff3b00] flex items-center justify-center flex-shrink-0">
+              <div className="flex items-center gap-3 pt-3 border-t border-slate-200/80">
+                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-[#ea580c] flex items-center justify-center flex-shrink-0 shadow-sm">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-wider">Response Time</div>
-                  <div className="text-xs font-semibold text-white">Within 12&ndash;24 Hours</div>
+                  <div className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">Response Time</div>
+                  <div className="text-xs font-semibold text-slate-900">Within 12&ndash;24 Hours</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 pt-3 border-t border-[#141414]">
-                <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#222222] text-[#ff3b00] flex items-center justify-center flex-shrink-0">
+              <div className="flex items-center gap-3 pt-3 border-t border-slate-200/80">
+                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-[#ea580c] flex items-center justify-center flex-shrink-0 shadow-sm">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-wider">Corporate Office</div>
-                  <div className="text-[11px] text-neutral-300">Newark, Delaware, USA</div>
+                  <div className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">Corporate Office</div>
+                  <div className="text-[11px] text-slate-700 font-medium">Newark, Delaware, USA</div>
                 </div>
               </div>
             </div>
 
             {/* Existing Customers Tip */}
-            <div className="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a] text-[11px] text-neutral-400 leading-relaxed font-mono space-y-1">
-              <span className="text-white font-bold block uppercase tracking-wider text-[10px]">Existing Customers</span>
-              <p className="text-neutral-400">If you have already purchased a service, please include your order number or service reference in your message.</p>
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 leading-relaxed font-mono space-y-1">
+              <span className="text-slate-900 font-bold block uppercase tracking-wider text-[10px]">Existing Customers</span>
+              <p className="text-slate-600">If you have already purchased a service, please include your order number or service reference in your message.</p>
             </div>
 
             {/* Security Advisory Box from Contact Us.docx */}
-            <div className="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a] text-[11px] text-neutral-400 leading-relaxed font-mono space-y-1.5">
-              <span className="text-[#ff551f] font-bold block uppercase tracking-wider text-[10px]">Before You Contact Us</span>
-              <p className="text-neutral-500">For your security, please do not send credit/debit card numbers, CVV security codes, account passwords, login credentials, or government IDs through contact forms or ordinary email.</p>
+            <div className="p-4 rounded-xl bg-amber-50/80 border border-amber-200 text-[11px] text-slate-700 leading-relaxed font-mono space-y-1.5">
+              <span className="text-amber-900 font-bold block uppercase tracking-wider text-[10px]">Before You Contact Us</span>
+              <p className="text-amber-800/90">For your security, please do not send credit/debit card numbers, CVV security codes, account passwords, login credentials, or government IDs through contact forms or ordinary email.</p>
             </div>
           </div>
 
           {/* Simple Clean Form (Right Side - 8 Columns) */}
           <div className="lg:col-span-8">
-            <div className="revond-panel p-6 sm:p-8 rounded-2xl border border-[#1e1e1e] bg-[#090909] shadow-2xl">
+            <div className="p-6 sm:p-8 rounded-2xl border border-slate-200 bg-white shadow-sm">
               {status === 'success' ? (
                 <div className="text-center py-10 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-[#ff3b00]/15 text-[#ff3b00] flex items-center justify-center mx-auto border border-[#ff3b00]/30">
+                  <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-200">
                     <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <h3 className="text-xl font-bold text-white font-space">Message Sent Successfully!</h3>
-                  <p className="text-xs text-neutral-400 max-w-md mx-auto leading-relaxed">
+                  <h3 className="text-xl font-bold text-slate-900 font-space">Message Sent Successfully!</h3>
+                  <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
                     Thank you for reaching out. We have received your inquiry and will follow up with you shortly.
                   </p>
                   <button
@@ -154,7 +157,7 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
                         consent: false,
                       });
                     }}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider revond-btn-orange"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider gower-btn-orange"
                   >
                     Send Another Message
                   </button>
@@ -162,7 +165,7 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {errorMessage && (
-                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-xs flex items-center gap-2">
+                    <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
                       <AlertCircle className="w-4 h-4 flex-shrink-0" />
                       <span>{errorMessage}</span>
                     </div>
@@ -171,8 +174,8 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
                   {/* 2-Column: Name & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
-                        Name <span className="text-[#ff3b00]">*</span>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 font-mono">
+                        Name <span className="text-[#ea580c]">*</span>
                       </label>
                       <input
                         type="text"
@@ -180,19 +183,19 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
                         placeholder="Your full name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00]"
+                        className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] focus:bg-white"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
-                        Email <span className="text-neutral-500 font-normal">(Optional)</span>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 font-mono">
+                        Email <span className="text-slate-400 font-normal">(Optional)</span>
                       </label>
                       <input
                         type="email"
                         placeholder="Your email address"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00]"
+                        className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] focus:bg-white"
                       />
                     </div>
                   </div>
@@ -200,25 +203,25 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
                   {/* 2-Column: Phone & Service selection */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
-                        Phone <span className="text-neutral-500 font-normal">(Optional)</span>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 font-mono">
+                        Phone <span className="text-slate-400 font-normal">(Optional)</span>
                       </label>
                       <input
                         type="tel"
                         placeholder="+1 (555) 000-0000"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00]"
+                        className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] focus:bg-white"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 font-mono">
                         Service of Interest
                       </label>
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00]"
+                        className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] focus:bg-white"
                       >
                         <option value="">General Inquiry / Consultation</option>
                         <optgroup label="Bundled Packages">
@@ -241,8 +244,8 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
 
                   {/* Message */}
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
-                      How can we help? <span className="text-[#ff3b00]">*</span>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 font-mono">
+                      How can we help? <span className="text-[#ea580c]">*</span>
                     </label>
                     <textarea
                       required
@@ -250,7 +253,7 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
                       placeholder="Briefly describe what you need (website, troubleshooting, training, resume, etc.)..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00] resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] focus:bg-white resize-none"
                     />
                   </div>
 
@@ -261,15 +264,15 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
                         type="checkbox"
                         checked={formData.consent}
                         onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                        className="mt-0.5 w-4 h-4 rounded border-[#333333] bg-[#0c0c0c] text-[#ff3b00] focus:ring-[#ff3b00]"
+                        className="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#ea580c] focus:ring-[#ea580c]"
                       />
-                      <span className="text-[11px] text-neutral-400 leading-normal font-sans">
+                      <span className="text-[11px] text-slate-600 leading-normal font-sans">
                         I agree to receive communications from Support Works International, Inc. regarding my inquiry. See our{' '}
-                        <Link href="/privacy-policy" className="text-[#ff551f] underline hover:text-white" target="_blank">
+                        <Link href="/privacy-policy" className="text-[#ea580c] underline hover:text-slate-900" target="_blank">
                           Privacy Policy
                         </Link>{' '}
                         and{' '}
-                        <Link href="/terms-and-conditions" className="text-[#ff551f] underline hover:text-white" target="_blank">
+                        <Link href="/terms-and-conditions" className="text-[#ea580c] underline hover:text-slate-900" target="_blank">
                           Terms
                         </Link>.
                       </span>
@@ -281,7 +284,7 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
                     <button
                       type="submit"
                       disabled={status === 'loading'}
-                      className="w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider revond-btn-orange flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                      className="w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider gower-btn-orange flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                     >
                       {status === 'loading' ? (
                         <span>Sending Message...</span>
@@ -303,3 +306,4 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
     </section>
   );
 }
+

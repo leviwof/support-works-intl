@@ -3,86 +3,153 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
+    color-scheme: light;
   }
 }
 
 :root {
-  --bg-black: #000000;
-  --bg-card: #0a0a0a;
-  --bg-card-subtle: #121212;
-  --accent-orange: #ff3b00;
-  --accent-orange-hover: #ff551f;
-  --accent-orange-glow: rgba(255, 59, 0, 0.25);
-  --border-dark: #1e1e1e;
-  --border-subtle: #2a2a2a;
-  --text-white: #ffffff;
-  --text-muted: #9e9e9e;
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-subtle: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
+  --border-subtle: #cbd5e1;
+  --corporate-navy: #0f2b48;
+  --corporate-navy-dark: #0a1e33;
+  --corporate-orange: #ea580c;
+  --corporate-orange-hover: #c2410c;
 }
 
 body {
-  background-color: #000000;
-  color: #f5f5f5;
+  background-color: #f8fafc;
+  color: #1e293b;
   overflow-x: hidden;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
-/* Custom premium scrollbar */
+/* Custom refined scrollbar for light corporate look */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #222222;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff3b00;
+  background: #94a3b8;
 }
 
-/* Card & Surface utilities matching Revond theme */
-.revond-card {
-  background: #0c0c0c;
-  border: 1px solid #1c1c1c;
+/* Gower-Style Light Corporate Card & Surface Utilities */
+.gower-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.04);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.revond-card:hover {
-  border-color: rgba(255, 59, 0, 0.45);
-  box-shadow: 0 12px 36px -12px rgba(255, 59, 0, 0.2);
+.gower-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.08);
   transform: translateY(-2px);
 }
 
-.revond-panel {
-  background: rgba(10, 10, 10, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid #1a1a1a;
+.gower-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
 }
 
-.revond-badge {
-  background: rgba(255, 59, 0, 0.12);
-  color: #ff551f;
-  border: 1px solid rgba(255, 59, 0, 0.3);
+.gower-badge {
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
 }
 
-.revond-btn-orange {
-  background: linear-gradient(135deg, #ff4500 0%, #ff2200 100%);
+.gower-badge-orange {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #ffedd5;
+}
+
+.gower-btn-primary {
+  background: #0f172a;
   color: #ffffff;
-  box-shadow: 0 8px 24px -6px rgba(255, 59, 0, 0.4);
-  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+  transition: all 0.2s ease;
 }
 
-.revond-btn-orange:hover {
-  background: linear-gradient(135deg, #ff5714 0%, #ff3b00 100%);
-  box-shadow: 0 12px 30px -4px rgba(255, 59, 0, 0.6);
+.gower-btn-primary:hover {
+  background: #1e293b;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
   transform: translateY(-1px);
 }
 
+.gower-btn-orange {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.25);
+  transition: all 0.2s ease;
+}
+
+.gower-btn-orange:hover {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  box-shadow: 0 8px 24px rgba(234, 88, 12, 0.35);
+  transform: translateY(-1px);
+}
+
+.gower-btn-secondary {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s ease;
+}
+
+.gower-btn-secondary:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #000000;
+  transform: translateY(-1px);
+}
+
+/* Retain backward-compatible helper classes to ensure smooth transition */
+.revond-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.revond-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.08);
+  transform: translateY(-2px);
+}
+.revond-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
+}
+.revond-badge {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #ffedd5;
+}
+.revond-btn-orange {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.25);
+  transition: all 0.2s ease;
+}
+.revond-btn-orange:hover {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  box-shadow: 0 8px 24px rgba(234, 88, 12, 0.35);
+  transform: translateY(-1px);
+}
 .revond-orange-gradient-text {
-  background: linear-gradient(135deg, #ffffff 30%, #ff6b3d 70%, #ff3b00 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ea580c;
 }

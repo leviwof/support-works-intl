@@ -18,8 +18,8 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#000000]">
-      {/* 1. Hero with Revond flame-orange & black visual impact */}
+    <div className="flex flex-col min-h-screen bg-[#f8fafc] text-slate-800">
+      {/* 1. Hero with Gower High-End Light Corporate theme */}
       <Hero />
 
       {/* 2. 4 Core Pillars */}

@@ -9,7 +9,7 @@ function ContactContent() {
   const serviceParam = searchParams.get('service') || '';
 
   return (
-    <div className="py-6 bg-[#000000] min-h-screen">
+    <div className="py-6 bg-[#f8fafc] text-slate-800 min-h-screen">
       <ContactSection selectedService={serviceParam} isStandalone={true} />
     </div>
   );
@@ -17,7 +17,7 @@ function ContactContent() {
 
 export default function ContactPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#000000] py-20 text-center text-neutral-400">Loading contact form...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#f8fafc] py-20 text-center text-slate-500">Loading contact form...</div>}>
       <ContactContent />
     </Suspense>
   );

@@ -46,8 +46,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} dark scroll-smooth`}>
-      <body className="min-h-screen flex flex-col bg-[#000000] text-neutral-100 antialiased font-sans selection:bg-[#ff3b00] selection:text-white">
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}>
+      <body className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 antialiased font-sans selection:bg-[#0f2b48] selection:text-white">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

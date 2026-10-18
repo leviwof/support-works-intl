@@ -12,7 +12,7 @@ export default function ServicesPage() {
   };
 
   return (
-    <div className="bg-[#000000] min-h-screen py-10">
+    <div className="bg-[#f8fafc] text-slate-800 min-h-screen py-10">
       <PricingCatalog onSelectService={handleSelectService} />
     </div>
   );
