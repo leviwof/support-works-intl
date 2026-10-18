@@ -10,9 +10,19 @@ export default function Footer() {
     <footer className="bg-[#0b1523] border-t border-slate-800/80 text-slate-400 text-xs pt-14 pb-12 font-sans relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
-        {/* Top Centered Slogan */}
-        <div className="mb-10">
-          <p className="text-sm sm:text-base text-slate-200 font-medium tracking-wide">
+        {/* Brand Shield Logo & Slogan */}
+        <div className="mb-10 flex flex-col items-center justify-center space-y-3">
+          <Link href="/" className="inline-block transition-transform hover:scale-105">
+            <img 
+              src="/logo-shield.png" 
+              alt="Support Works International Logo" 
+              className="w-auto h-12 object-contain drop-shadow-[0_4px_16px_rgba(109,12,234,0.35)]" 
+            />
+          </Link>
+          <div className="font-extrabold text-base tracking-tight text-white font-space">
+            Support Works International, Inc.
+          </div>
+          <p className="text-sm sm:text-base text-slate-300 font-medium tracking-wide max-w-lg mx-auto">
             We don’t just deliver services &mdash; we drive transformation that lasts.
           </p>
         </div>

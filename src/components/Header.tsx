@@ -40,19 +40,21 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           
-          {/* Logo in Gower High-End Corporate Style */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-[#0f2b48] flex items-center justify-center text-white shadow-md shadow-slate-900/10 group-hover:bg-[#ea580c] transition-colors">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                <path d="M4 4h7a5 5 0 0 1 5 5c0 2.1-1.3 3.9-3.2 4.6L18 20h-4.5l-4.5-5.5H8.5V20H4V4zm4.5 7.5h2.5a2 2 0 1 0 0-4H8.5v4z" />
-              </svg>
+          {/* Logo with User's Faceted Shield Emblem */}
+          <Link href="/" className="flex items-center gap-3.5 group">
+            <div className="relative w-9 h-11 flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+              <img 
+                src="/logo-shield.png" 
+                alt="Support Works International Logo" 
+                className="w-full h-full object-contain drop-shadow-[0_2px_8px_rgba(109,12,234,0.18)]" 
+              />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-xl tracking-tight text-slate-900 group-hover:text-[#0f2b48] transition-colors font-space">
+                <span className="font-extrabold text-xl tracking-tight text-slate-900 group-hover:text-[#6d0cea] transition-colors font-space">
                   SUPPORT WORKS
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-orange-50 text-[#ea580c] border border-orange-200 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-purple-50 text-[#7c3aed] border border-purple-200/80 font-mono">
                   INC
                 </span>
               </div>
