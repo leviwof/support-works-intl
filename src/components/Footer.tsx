@@ -63,27 +63,17 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Email and Website (Parallel Right side) */}
-          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 text-center md:text-right">
-            <div>
-              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">
-                E-Mail
-              </span>
-              <a 
-                href="mailto:info@supportworksinternational.com" 
-                className="text-white hover:text-[#ea580c] transition-colors font-semibold"
-              >
-                info@supportworksinternational.com
-              </a>
-            </div>
-            <div>
-              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">
-                Website
-              </span>
-              <span className="text-slate-300">
-                supportworksinternational.com
-              </span>
-            </div>
+          {/* Email (Parallel Right side) */}
+          <div className="text-center md:text-right space-y-1">
+            <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">
+              E-Mail
+            </span>
+            <a 
+              href="mailto:info@supportworksinternational.com" 
+              className="text-white hover:text-[#ea580c] transition-colors font-semibold"
+            >
+              info@supportworksinternational.com
+            </a>
           </div>
         </div>
 
