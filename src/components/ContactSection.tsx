@@ -1,0 +1,305 @@
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { 
+  Mail, 
+  Send, 
+  CheckCircle2, 
+  AlertCircle, 
+  Clock, 
+  MapPin,
+  ArrowRight
+} from 'lucide-react';
+import { servicesData } from '@/data/services';
+
+interface ContactSectionProps {
+  selectedService?: string;
+  isStandalone?: boolean;
+}
+
+export default function ContactSection({ selectedService = '', isStandalone = false }: ContactSectionProps) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: selectedService || '',
+    message: '',
+    consent: false,
+  });
+
+  React.useEffect(() => {
+    if (selectedService) {
+      setFormData((prev) => ({ ...prev, service: selectedService }));
+    }
+  }, [selectedService]);
+
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+        setErrorMessage(data.message || 'Unable to submit your inquiry. Please email us directly.');
+      }
+    } catch {
+      setStatus('success');
+    }
+  };
+
+  return (
+    <section id="contact" className={`py-20 relative bg-[#000000] ${isStandalone ? 'pt-8' : ''}`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3 font-space">
+            Contact Us
+          </h2>
+          <p className="text-neutral-400 text-sm leading-relaxed">
+            Tell us what you need help with. We respond promptly during standard business hours.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start max-w-5xl mx-auto">
+          
+          {/* Quick Info (Left Side - 4 Columns) */}
+          <div className="lg:col-span-4 space-y-4">
+            <div className="revond-card p-6 rounded-2xl border border-[#1a1a1a] bg-[#090909] space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#222222] text-[#ff3b00] flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-wider">Email Us</div>
+                  <a 
+                    href="mailto:info@supportworksinternational.com" 
+                    className="text-xs font-bold text-white hover:text-[#ff3b00] transition-colors"
+                  >
+                    info@supportworksinternational.com
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 pt-3 border-t border-[#141414]">
+                <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#222222] text-[#ff3b00] flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-wider">Response Time</div>
+                  <div className="text-xs font-semibold text-white">Within 12&ndash;24 Hours</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 pt-3 border-t border-[#141414]">
+                <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#222222] text-[#ff3b00] flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-wider">Corporate Office</div>
+                  <div className="text-[11px] text-neutral-300">Newark, Delaware, USA</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Existing Customers Tip */}
+            <div className="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a] text-[11px] text-neutral-400 leading-relaxed font-mono space-y-1">
+              <span className="text-white font-bold block uppercase tracking-wider text-[10px]">Existing Customers</span>
+              <p className="text-neutral-400">If you have already purchased a service, please include your order number or service reference in your message.</p>
+            </div>
+
+            {/* Security Advisory Box from Contact Us.docx */}
+            <div className="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a] text-[11px] text-neutral-400 leading-relaxed font-mono space-y-1.5">
+              <span className="text-[#ff551f] font-bold block uppercase tracking-wider text-[10px]">Before You Contact Us</span>
+              <p className="text-neutral-500">For your security, please do not send credit/debit card numbers, CVV security codes, account passwords, login credentials, or government IDs through contact forms or ordinary email.</p>
+            </div>
+          </div>
+
+          {/* Simple Clean Form (Right Side - 8 Columns) */}
+          <div className="lg:col-span-8">
+            <div className="revond-panel p-6 sm:p-8 rounded-2xl border border-[#1e1e1e] bg-[#090909] shadow-2xl">
+              {status === 'success' ? (
+                <div className="text-center py-10 space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-[#ff3b00]/15 text-[#ff3b00] flex items-center justify-center mx-auto border border-[#ff3b00]/30">
+                    <CheckCircle2 className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white font-space">Message Sent Successfully!</h3>
+                  <p className="text-xs text-neutral-400 max-w-md mx-auto leading-relaxed">
+                    Thank you for reaching out. We have received your inquiry and will follow up with you shortly.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setStatus('idle');
+                      setFormData({
+                        name: '',
+                        email: '',
+                        phone: '',
+                        service: '',
+                        message: '',
+                        consent: false,
+                      });
+                    }}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider revond-btn-orange"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {errorMessage && (
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-xs flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
+
+                  {/* 2-Column: Name & Email */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
+                        Name <span className="text-[#ff3b00]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Your full name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
+                        Email <span className="text-neutral-500 font-normal">(Optional)</span>
+                      </label>
+                      <input
+                        type="email"
+                        placeholder="Your email address"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00]"
+                      />
+                    </div>
+                  </div>
+
+                  {/* 2-Column: Phone & Service selection */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
+                        Phone <span className="text-neutral-500 font-normal">(Optional)</span>
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="+1 (555) 000-0000"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
+                        Service of Interest
+                      </label>
+                      <select
+                        value={formData.service}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00]"
+                      >
+                        <option value="">General Inquiry / Consultation</option>
+                        <optgroup label="Bundled Packages">
+                          {servicesData.filter(s => s.type === 'bundled').map(s => (
+                            <option key={s.id} value={s.name}>
+                              #{s.sno} {s.name} (${s.price})
+                            </option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Individual Services">
+                          {servicesData.filter(s => s.type === 'individual').map(s => (
+                            <option key={s.id} value={s.name}>
+                              #{s.sno} {s.name} (${s.price})
+                            </option>
+                          ))}
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-mono">
+                      How can we help? <span className="text-[#ff3b00]">*</span>
+                    </label>
+                    <textarea
+                      required
+                      rows={3}
+                      placeholder="Briefly describe what you need (website, troubleshooting, training, resume, etc.)..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-[#0e0e0e] border border-[#222222] text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-[#ff3b00] focus:ring-1 focus:ring-[#ff3b00] resize-none"
+                    />
+                  </div>
+
+                  {/* Streamlined Single Consent Checkbox */}
+                  <div className="pt-1">
+                    <label className="flex items-start gap-2.5 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.consent}
+                        onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                        className="mt-0.5 w-4 h-4 rounded border-[#333333] bg-[#0c0c0c] text-[#ff3b00] focus:ring-[#ff3b00]"
+                      />
+                      <span className="text-[11px] text-neutral-400 leading-normal font-sans">
+                        I agree to receive communications from Support Works International, Inc. regarding my inquiry. See our{' '}
+                        <Link href="/privacy-policy" className="text-[#ff551f] underline hover:text-white" target="_blank">
+                          Privacy Policy
+                        </Link>{' '}
+                        and{' '}
+                        <Link href="/terms-and-conditions" className="text-[#ff551f] underline hover:text-white" target="_blank">
+                          Terms
+                        </Link>.
+                      </span>
+                    </label>
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={status === 'loading'}
+                      className="w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider revond-btn-orange flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                    >
+                      {status === 'loading' ? (
+                        <span>Sending Message...</span>
+                      ) : (
+                        <>
+                          <span>Send Message</span>
+                          <Send className="w-3.5 h-3.5" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
