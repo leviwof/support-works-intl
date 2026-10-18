@@ -16,9 +16,6 @@ export default function ApproachPage() {
       {/* Hero Banner for Approach */}
       <section className="py-20 lg:py-24 relative border-b border-slate-200/80 bg-white text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200/60 text-[#ea580c] text-[11px] font-bold tracking-widest uppercase mb-4 font-mono">
-            Methodology &amp; Execution
-          </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 font-space">
             Collaborative Transformation
           </h1>

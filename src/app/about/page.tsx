@@ -16,9 +16,6 @@ export default function AboutPage() {
       {/* Hero section for About */}
       <section className="py-20 lg:py-28 relative border-b border-slate-200/80 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200/60 text-[#ea580c] text-[11px] font-bold tracking-widest uppercase mb-4 font-mono">
-            Company Overview
-          </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 font-space">
             Practical Technology. <br />
             <span className="text-[#ea580c]">Digital Solutions.</span>

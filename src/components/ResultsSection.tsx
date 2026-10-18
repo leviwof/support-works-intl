@@ -44,9 +44,6 @@ export default function ResultsSection() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/5 rounded-full blur-[100px] pointer-events-none -z-10" />
 
           <div className="max-w-3xl mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200/60 text-[#ea580c] text-[11px] font-bold tracking-widest uppercase mb-3 font-mono">
-              Proven Outcomes
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 font-space">
               We Don&apos;t Just Deliver Services &mdash; We Drive Real Results
             </h2>

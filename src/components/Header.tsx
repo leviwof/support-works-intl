@@ -27,7 +27,6 @@ export default function Header() {
     { label: 'About Us', href: '/about' },
     { label: 'Services & Pricing', href: '/services' },
     { label: 'Our Approach', href: '/approach' },
-    { label: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -83,13 +82,13 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Right Action Consultation Button */}
+          {/* Right Action Contact Button */}
           <div className="hidden sm:flex items-center gap-3">
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider gower-btn-primary"
             >
-              <span>Get Consultation</span>
+              <span>Contact Us</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -129,7 +128,7 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-wider gower-btn-primary"
               >
-                <span>Get Consultation</span>
+                <span>Contact Us</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
