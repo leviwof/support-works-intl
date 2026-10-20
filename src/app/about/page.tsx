@@ -12,9 +12,7 @@ import {
   Briefcase,
   Rocket,
   Store,
-  Check,
-  Sparkles,
-  Layers
+  Check
 } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -93,10 +91,6 @@ export default function AboutPage() {
       {/* 1. HERO SECTION (Word-for-Word Document Content) */}
       <section className="py-20 lg:py-28 relative border-b border-slate-200/80 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200/70 text-[#6d0cea] text-xs font-mono font-bold uppercase tracking-wider mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Support Works International, Inc.</span>
-          </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight mb-4 font-space">
             About Us
@@ -138,9 +132,6 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 block mb-2">
-              Capabilities &amp; Solutions
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 font-space">
               What We Do
             </h2>
@@ -180,8 +171,7 @@ export default function AboutPage() {
                     </p>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-700 font-mono">
-                    <span className="text-slate-400">Fixed Flat Rates</span>
+                  <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-end text-xs font-bold uppercase tracking-wider text-slate-700 font-mono">
                     <Link 
                       href="/services" 
                       className="text-[#6d0cea] hover:text-[#ea580c] inline-flex items-center gap-1 transition-colors"
@@ -204,9 +194,6 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 block mb-2">
-              Methodology &amp; Standards
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 font-space">
               Our Approach
             </h2>
@@ -223,19 +210,14 @@ export default function AboutPage() {
             {approachPillars.map((pillar, idx) => (
               <div 
                 key={idx}
-                className="p-5 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-colors flex items-start gap-3.5"
+                className="p-5 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-colors flex items-center gap-3.5"
               >
-                <div className="w-6 h-6 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-6 h-6 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center flex-shrink-0">
                   <Check className="w-3.5 h-3.5" />
                 </div>
-                <div>
-                  <span className="text-sm font-bold text-slate-800 font-space block">
-                    {pillar}
-                  </span>
-                  <span className="text-xs text-slate-500">
-                    Standardized delivery metric
-                  </span>
-                </div>
+                <span className="text-sm font-bold text-slate-800 font-space">
+                  {pillar}
+                </span>
               </div>
             ))}
           </div>
@@ -250,14 +232,9 @@ export default function AboutPage() {
       </section>
 
 
-      {/* 4. FLEXIBLE ONE-TIME SERVICES (Critical Missing Section from Doc) */}
+      {/* 4. FLEXIBLE ONE-TIME SERVICES */}
       <section className="py-20 lg:py-24 relative bg-[#0f172a] text-white border-b border-slate-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-orange-400 text-xs font-mono font-bold uppercase tracking-wider mb-6">
-            <Layers className="w-3.5 h-3.5" />
-            <span>Zero Subscription Trap</span>
-          </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-6 font-space">
             Flexible One-Time Services
@@ -308,14 +285,11 @@ export default function AboutPage() {
       </section>
 
 
-      {/* 5. SERVICES FOR INDIVIDUALS AND SMALL BUSINESSES (Word-for-Word Doc Content) */}
+      {/* 5. SERVICES FOR INDIVIDUALS AND SMALL BUSINESSES */}
       <section className="py-20 lg:py-24 relative bg-white border-b border-slate-200/60">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 block mb-2">
-              Tailored Customer Segments
-            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 font-space">
               Services for Individuals and Small Businesses
             </h2>
@@ -345,12 +319,6 @@ export default function AboutPage() {
                       {segment.description}
                     </p>
                   </div>
-
-                  <div className="pt-5 mt-6 border-t border-slate-200/80">
-                    <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
-                      Dedicated Scope
-                    </span>
-                  </div>
                 </div>
               );
             })}
@@ -360,7 +328,7 @@ export default function AboutPage() {
       </section>
 
 
-      {/* 6. OUR COMMITMENT TO CUSTOMERS (Word-for-Word Doc Content) */}
+      {/* 6. OUR COMMITMENT TO CUSTOMERS */}
       <section className="py-20 lg:py-24 relative bg-[#f8fafc] border-b border-slate-200/60">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -369,9 +337,6 @@ export default function AboutPage() {
               <ShieldCheck className="w-7 h-7" />
             </div>
 
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 block mb-2">
-              Privacy, Scope &amp; Transparency
-            </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-6 font-space">
               Our Commitment to Customers
             </h2>
@@ -411,7 +376,7 @@ export default function AboutPage() {
       </section>
 
 
-      {/* 7. A STRAIGHTFORWARD WAY TO GET DIGITAL HELP (Word-for-Word Closing Section) */}
+      {/* 7. A STRAIGHTFORWARD WAY TO GET DIGITAL HELP */}
       <section className="py-20 lg:py-24 relative bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           
