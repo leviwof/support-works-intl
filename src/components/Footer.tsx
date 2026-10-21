@@ -16,6 +16,8 @@ export default function Footer() {
             <img 
               src="/logo-shield.png" 
               alt="Support Works International Logo" 
+              width={40}
+              height={48}
               className="w-auto h-12 object-contain drop-shadow-[0_4px_16px_rgba(109,12,234,0.35)]" 
             />
           </Link>

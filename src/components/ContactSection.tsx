@@ -9,7 +9,10 @@ import {
   AlertCircle, 
   Clock, 
   MapPin,
-  ArrowRight
+  Copy,
+  Check,
+  Tag,
+  X
 } from 'lucide-react';
 import { servicesData } from '@/data/services';
 
@@ -28,6 +31,8 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
     consent: false,
   });
 
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
   React.useEffect(() => {
     if (selectedService) {
       setFormData((prev) => ({ ...prev, service: selectedService }));
@@ -36,6 +41,12 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('info@supportworksinternational.com');
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,18 +92,34 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
           {/* Quick Info (Left Side - 4 Columns) */}
           <div className="lg:col-span-4 space-y-4">
             <div className="p-6 rounded-2xl border border-slate-200 bg-slate-50/80 space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-[#ea580c] flex items-center justify-center flex-shrink-0 shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-[#ea580c] flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
                   <Mail className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <div className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">Email Us</div>
                   <a 
                     href="mailto:info@supportworksinternational.com" 
-                    className="text-xs font-bold text-slate-900 hover:text-[#ea580c] transition-colors"
+                    className="text-xs font-bold text-slate-900 hover:text-[#ea580c] transition-colors break-all block"
                   >
                     info@supportworksinternational.com
                   </a>
+                  <button
+                    onClick={handleCopyEmail}
+                    className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-mono text-[#ea580c] hover:text-[#c2410c] transition-colors"
+                  >
+                    {copiedEmail ? (
+                      <>
+                        <Check className="w-3 h-3 text-emerald-600" />
+                        <span className="text-emerald-600 font-semibold">Copied to clipboard!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3 h-3" />
+                        <span>Copy address</span>
+                      </>
+                    )}
+                  </button>
                 </div>
               </div>
 
@@ -133,6 +160,27 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
           {/* Simple Clean Form (Right Side - 8 Columns) */}
           <div className="lg:col-span-8">
             <div className="p-6 sm:p-8 rounded-2xl border border-slate-200 bg-white shadow-sm">
+              
+              {/* Selected Service Notification Banner */}
+              {formData.service && (
+                <div className="mb-6 p-3 rounded-xl bg-purple-50 border border-purple-200/80 flex items-center justify-between text-xs text-purple-900">
+                  <div className="flex items-center gap-2">
+                    <Tag className="w-4 h-4 text-[#7c3aed] flex-shrink-0" />
+                    <span>
+                      Inquiring about: <strong className="font-semibold text-slate-900">{formData.service}</strong>
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, service: '' })}
+                    className="text-purple-600 hover:text-purple-900 p-1"
+                    title="Clear selected service"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
+
               {status === 'success' ? (
                 <div className="text-center py-10 space-y-4">
                   <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-200">
@@ -303,4 +351,3 @@ export default function ContactSection({ selectedService = '', isStandalone = fa
     </section>
   );
 }
-

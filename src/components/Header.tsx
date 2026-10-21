@@ -18,9 +18,21 @@ export default function Header() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { label: 'Home', href: '/' },
@@ -46,6 +58,8 @@ export default function Header() {
               <img 
                 src="/logo-shield.png" 
                 alt="Support Works International Logo" 
+                width={36}
+                height={44}
                 className="w-full h-full object-contain drop-shadow-[0_2px_8px_rgba(109,12,234,0.18)]" 
               />
             </div>
@@ -64,7 +78,7 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation Links (Gower Editorial Style) */}
+          {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -108,9 +122,17 @@ export default function Header() {
         </div>
       </header>
 
+      {/* Mobile Menu Overlay Backdrop */}
+      {mobileMenuOpen && (
+        <div 
+          onClick={() => setMobileMenuOpen(false)}
+          className="lg:hidden fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs transition-opacity"
+        />
+      )}
+
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[73px] z-40 bg-white/98 backdrop-blur-xl border-b border-slate-200 px-6 py-6 shadow-xl">
+        <div className="lg:hidden fixed inset-x-0 top-[73px] z-50 bg-white border-b border-slate-200 px-6 py-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
           <div className="flex flex-col space-y-4">
             {navLinks.map((link) => (
               <Link

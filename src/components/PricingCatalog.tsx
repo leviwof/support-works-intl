@@ -7,10 +7,12 @@ import {
   ArrowRight, 
   Check, 
   ChevronLeft, 
-  ChevronRight,
-  Grid,
-  Eye,
-  HelpCircle
+  ChevronRight, 
+  Grid, 
+  Eye, 
+  HelpCircle,
+  SlidersHorizontal,
+  RotateCcw
 } from 'lucide-react';
 import { servicesData, ServiceItem } from '@/data/services';
 
@@ -22,6 +24,8 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeType, setActiveType] = useState<'all' | 'individual' | 'bundled'>('all');
+  const [sortBy, setSortBy] = useState<'default' | 'price-asc' | 'price-desc' | 'name-asc'>('default');
+  const [priceRange, setPriceRange] = useState<'all' | 'under-100' | '100-300' | 'above-300'>('all');
   
   // Spotlight 6-card slider state
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -56,9 +60,9 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
     ];
   }, []);
 
-  // Filtered Services based on search, category, and type
+  // Filtered and Sorted Services
   const searchResults = useMemo(() => {
-    return servicesData.filter((service) => {
+    const filtered = servicesData.filter((service) => {
       // Type Filter
       if (activeType === 'individual' && service.type !== 'individual') return false;
       if (activeType === 'bundled' && service.type !== 'bundled') return false;
@@ -71,6 +75,12 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
           return false;
         }
       }
+
+      // Price Range Filter
+      const priceVal = service.price;
+      if (priceRange === 'under-100' && priceVal >= 100) return false;
+      if (priceRange === '100-300' && (priceVal < 100 || priceVal > 300)) return false;
+      if (priceRange === 'above-300' && priceVal <= 300) return false;
 
       // Search Query
       if (searchTerm.trim() !== '') {
@@ -85,7 +95,21 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
 
       return true;
     });
-  }, [searchTerm, selectedCategory, activeType]);
+
+    // Sorting
+    return [...filtered].sort((a, b) => {
+      if (sortBy === 'price-asc') {
+        return a.price - b.price;
+      }
+      if (sortBy === 'price-desc') {
+        return b.price - a.price;
+      }
+      if (sortBy === 'name-asc') {
+        return a.name.localeCompare(b.name);
+      }
+      return a.sno - b.sno; // Default numerical order
+    });
+  }, [searchTerm, selectedCategory, activeType, priceRange, sortBy]);
 
   // Handle CTA Click
   const handleSelect = (serviceName: string) => {
@@ -96,8 +120,16 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
     }
   };
 
+  const handleResetFilters = () => {
+    setSearchTerm('');
+    setSelectedCategory('All');
+    setActiveType('all');
+    setPriceRange('all');
+    setSortBy('default');
+  };
+
   const isSearching = searchTerm.trim().length > 0;
-  const isCategoryFiltered = selectedCategory !== 'All' || activeType !== 'all';
+  const isCategoryFiltered = selectedCategory !== 'All' || activeType !== 'all' || priceRange !== 'all' || sortBy !== 'default';
   const shouldShowFullGrid = isSearching || isCategoryFiltered || showAllServices;
 
   // Next / Previous for slider (loops through 6 cards, max 4 slides when showing 3 per row)
@@ -106,25 +138,25 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
   const prevSlide = () => setCurrentSlideIndex((prev) => (prev - 1 + maxSlides) % maxSlides);
 
   return (
-    <section id="pricing" className="py-24 relative bg-[#f8fafc] border-b border-slate-200/60">
+    <section id="pricing" className="py-20 lg:py-24 relative bg-[#f8fafc] border-b border-slate-200/60">
       
-      {/* Subtle background ambient touch */}
+      {/* Ambient touch */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-slate-200/40 blur-[140px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header in Gower Editorial Style */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 font-space">
             Service Catalog &amp; Transparent Rates
           </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            One-time fixed rates with zero hidden fees. Explore our 6 spotlight solutions in the slider below, or search across our full catalog of 57 offerings.
+            One-time fixed rates with zero hidden fees. Explore our spotlight solutions in the slider below, or search across our full catalog of 57 offerings.
           </p>
         </div>
 
         {/* Search Bar & Instant Discovery (Searches ALL 57 Services) */}
-        <div className="gower-panel p-4 sm:p-6 rounded-2xl mb-10 bg-white border border-slate-200 shadow-sm">
+        <div className="gower-panel p-4 sm:p-6 rounded-2xl mb-8 bg-white border border-slate-200 shadow-sm">
           <div className="flex flex-col md:flex-row items-center gap-4 justify-between">
             {/* Search Input */}
             <div className="relative w-full md:w-96">
@@ -134,12 +166,16 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
                 placeholder="Search all 57 services (WordPress, Excel, Resume, Troubleshooting)..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') setSearchTerm('');
+                }}
                 className="w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0f2b48] focus:bg-white transition-all"
               />
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm('')}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500 hover:text-slate-800 px-1.5 py-0.5 rounded bg-slate-200"
+                  title="Clear search (Esc)"
                 >
                   Clear
                 </button>
@@ -205,6 +241,52 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
               );
             })}
           </div>
+
+          {/* Quick Price Bracket & Sort Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 mt-3 border-t border-slate-100 text-xs text-slate-600">
+            {/* Price Brackets */}
+            <div className="flex items-center gap-1.5 overflow-x-auto">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mr-1 hidden sm:inline">
+                Price:
+              </span>
+              {[
+                { label: 'All Rates', value: 'all' },
+                { label: 'Under $100', value: 'under-100' },
+                { label: '$100 - $300', value: '100-300' },
+                { label: '$300+', value: 'above-300' },
+              ].map((p) => (
+                <button
+                  key={p.value}
+                  onClick={() => setPriceRange(p.value as typeof priceRange)}
+                  className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors ${
+                    priceRange === p.value
+                      ? 'bg-orange-50 text-[#ea580c] font-bold border border-orange-200'
+                      : 'text-slate-600 hover:text-slate-900 bg-slate-50 border border-slate-200/60'
+                  }`}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Sort Dropdown */}
+            <div className="flex items-center gap-2 ml-auto">
+              <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
+              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 hidden sm:inline">
+                Sort:
+              </span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+                className="py-1 px-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 focus:outline-none focus:border-[#ea580c]"
+              >
+                <option value="default">Default (#1 to #57)</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Name: A to Z</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         {/* MODE 1: SEARCH RESULTS OR FILTERED VIEW OR "SEE MORE" FULL GRID */}
@@ -216,17 +298,30 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
                 Found <strong className="text-slate-900 text-sm">{searchResults.length}</strong> services
                 {searchTerm && <span> matching &ldquo;<span className="text-[#ea580c] font-semibold">{searchTerm}</span>&rdquo;</span>}
                 {selectedCategory !== 'All' && <span> in <span className="text-[#ea580c] font-semibold">{selectedCategory}</span></span>}
+                {priceRange !== 'all' && <span> ({priceRange === 'under-100' ? '< $100' : priceRange === '100-300' ? '$100-$300' : '$300+'})</span>}
               </div>
 
-              {!isSearching && !isCategoryFiltered && showAllServices && (
-                <button
-                  onClick={() => setShowAllServices(false)}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#ea580c] hover:text-[#c2410c] transition-colors"
-                >
-                  <Eye className="w-3.5 h-3.5" />
-                  <span>Switch Back to 6-Card Spotlight Slider</span>
-                </button>
-              )}
+              <div className="flex items-center gap-4">
+                {(isSearching || isCategoryFiltered) && (
+                  <button
+                    onClick={handleResetFilters}
+                    className="inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-800 transition-colors"
+                  >
+                    <RotateCcw className="w-3 h-3" />
+                    <span>Reset Filters</span>
+                  </button>
+                )}
+
+                {!isSearching && !isCategoryFiltered && showAllServices && (
+                  <button
+                    onClick={() => setShowAllServices(false)}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#ea580c] hover:text-[#c2410c] transition-colors"
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>Switch Back to Spotlight Slider</span>
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Grid of Results */}
@@ -317,19 +412,16 @@ export default function PricingCatalog({ onSelectService }: PricingCatalogProps)
             {searchResults.length === 0 && (
               <div className="text-center py-16 gower-card rounded-2xl border border-slate-200 bg-white">
                 <HelpCircle className="w-12 h-12 text-slate-400 mx-auto mb-3" />
-                <h4 className="text-lg font-bold text-slate-900 mb-1">No services found</h4>
+                <h4 className="text-lg font-bold text-slate-900 mb-1">No services match your filters</h4>
                 <p className="text-sm text-slate-600 mb-4 max-w-md mx-auto">
-                  We couldn&apos;t find any service matching &ldquo;{searchTerm}&rdquo;. Try another term or contact our support desk for custom solutions.
+                  We couldn&apos;t find any service matching your active filters. Try clearing your search term or resetting your price bracket.
                 </p>
                 <button
-                  onClick={() => {
-                    setSearchTerm('');
-                    setSelectedCategory('All');
-                    setActiveType('all');
-                  }}
-                  className="text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg gower-btn-orange"
+                  onClick={handleResetFilters}
+                  className="text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg gower-btn-orange inline-flex items-center gap-2"
                 >
-                  Reset Filters
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Reset All Filters</span>
                 </button>
               </div>
             )}
